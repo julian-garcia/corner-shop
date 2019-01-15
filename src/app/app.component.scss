@@ -1,10 +1,20 @@
+@import "global";
+
 .grid-container {
   display: grid;
   flex-flow: row wrap;
-  grid-template-areas: "header" "cart";
+  min-height: calc(100vh - 2px);
+  grid-template-areas: "header" "maincontent" "footer";
+  grid-template-columns: 1fr;
+  grid-template-rows: 8rem 1fr 2rem;
   grid-gap: 10px;
 
-  @media (min-width: 600px) {
+  @media (min-width: $mobile_width) {
+    margin: 0 10%;
+    grid-template-rows: 4rem 1fr 2rem;
+  }
+
+  @media (min-width: $tablet_width) {
     margin: 0 20%;
   }
 }
@@ -12,6 +22,7 @@
 header {
   grid-area: header;
 }
-shopping-cart {
-  grid-area: cart;
+
+footer {
+  grid-area: footer;
 }

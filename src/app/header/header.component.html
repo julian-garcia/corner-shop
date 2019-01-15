@@ -1,5 +1,17 @@
-<ul>
-  <li class="menu-item">a</li>
-  <li class="menu-item">b</li>
-  <li class="menu-item">c</li>
+<ul class="main-menu">
+  <li class="menu-item" routerLink="/">
+    <img src="assets/img/pepper.svg" alt="Corner shop logo" class="logo">
+  </li>
+  <li class="menu-item" routerLink="/shopping-cart">
+    Shopping Cart
+  </li>
+  <li class="menu-item user" (click)="onDropDownClick()">
+    User Name <i class="fas fa-caret-down"></i>
+    <ul class="drop-down-menu" *ngIf="showDropDownMenu">
+      <li>My Orders</li>
+      <li>Log Out</li>
+      <li>Manage Orders</li>
+      <li>Manage Products</li>
+    </ul>
+  </li>
 </ul>
