@@ -1,0 +1,17 @@
+.grid-container {
+  display: grid;
+  flex-flow: row wrap;
+  grid-template-areas: "header" "cart";
+  grid-gap: 10px;
+
+  @media (min-width: 600px) {
+    margin: 0 20%;
+  }
+}
+
+header {
+  grid-area: header;
+}
+shopping-cart {
+  grid-area: cart;
+}

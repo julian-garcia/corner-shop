@@ -1,0 +1,12 @@
+ul {
+  display: grid;
+  flex-flow: row wrap;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0;
+}
+.menu-item {
+  text-align: center;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
