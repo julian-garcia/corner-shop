@@ -8,10 +8,10 @@
   <li class="menu-item user" (click)="onDropDownClick()">
     User Name <i class="fas fa-caret-down"></i>
     <ul class="drop-down-menu" *ngIf="showDropDownMenu">
-      <li>My Orders</li>
+      <li routerLink="/my-orders">My Orders</li>
       <li>Log Out</li>
-      <li>Manage Orders</li>
-      <li>Manage Products</li>
+      <li routerLink="/admin/orders">Manage Orders</li>
+      <li routerLink="/admin/products">Manage Products</li>
     </ul>
   </li>
 </ul>
