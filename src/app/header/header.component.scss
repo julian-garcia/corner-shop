@@ -8,7 +8,7 @@ ul.main-menu {
   margin: 0;
 
   @media (min-width:$mobile_width) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .menu-item {
