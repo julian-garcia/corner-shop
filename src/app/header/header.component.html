@@ -5,14 +5,16 @@
   <li class="menu-item" routerLink="/shopping-cart">
     Shopping Cart
   </li>
-  <li class="menu-item" routerLink="/login">
-    Log In
-  </li>
-  <li class="menu-item user" (click)="onDropDownClick()">
-    User Name <i class="fas fa-caret-down"></i>
+  <ng-template #anonUser>
+    <li class="menu-item" routerLink="/login">
+      Log In
+    </li>
+  </ng-template>
+  <li *ngIf="authService.user$ | async as user; else anonUser" class="menu-item user" (click)="onDropDownClick()">
+    {{ user.displayName }} <i class="fas fa-caret-down"></i>
     <ul class="drop-down-menu" *ngIf="showDropDownMenu">
       <li routerLink="/my-orders">My Orders</li>
-      <li>Log Out</li>
+      <li (click)="logout()">Log Out</li>
       <li routerLink="/admin/orders">Manage Orders</li>
       <li routerLink="/admin/products">Manage Products</li>
     </ul>

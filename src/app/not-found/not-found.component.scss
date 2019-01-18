@@ -1,3 +1,7 @@
 @import "global";
 
 :host {grid-area: maincontent;}
+
+a {
+  font-family: $heading_font;
+}

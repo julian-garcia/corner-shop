@@ -1,7 +1,11 @@
-h1, .menu-item {
+h1, h2, h3, h4, h5, h6, .menu-item {
   font-family: $heading_font;
 }
 
-p, input  {
+a, p, input  {
   font-family: $body_font;
+}
+
+a {
+  text-decoration: none;
 }
