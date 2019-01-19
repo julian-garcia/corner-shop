@@ -21,11 +21,18 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { LoginComponent } from './login/login.component';
 
 import { AuthService } from './auth.service';
+import { AuthGuard } from './auth-guard.service';
+import { UserService } from './user.service';
+import { AdminAuthGuardService as AdminAuthGuard } from './admin-auth-guard.service';
 
 let routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'shopping-cart',
@@ -37,27 +44,28 @@ let routes = [
   },
   {
     path: 'check-out',
-    component: CheckOutComponent
+    component: CheckOutComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'order-details',
-    component: OrderOutcomeComponent
+    component: OrderOutcomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'my-orders',
-    component: MyOrdersComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
+    component: MyOrdersComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'admin/products',
-    component: AdminProductsComponent
+    component: AdminProductsComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
     path: 'admin/orders',
-    component: AdminOrdersComponent
+    component: AdminOrdersComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
     path: '**',
@@ -88,7 +96,12 @@ let routes = [
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    AuthGuard,
+    UserService,
+    AdminAuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

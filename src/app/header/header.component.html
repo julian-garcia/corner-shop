@@ -11,12 +11,16 @@
     </li>
   </ng-template>
   <li *ngIf="authService.user$ | async as user; else anonUser" class="menu-item user" (click)="onDropDownClick()">
-    {{ user.displayName }} <i class="fas fa-caret-down"></i>
+    {{ user.displayName }} 
+    <i class="fas fa-caret-down" *ngIf="!showDropDownMenu"></i>
+    <i class="fas fa-caret-up" *ngIf="showDropDownMenu"></i>
     <ul class="drop-down-menu" *ngIf="showDropDownMenu">
       <li routerLink="/my-orders">My Orders</li>
       <li (click)="logout()">Log Out</li>
-      <li routerLink="/admin/orders">Manage Orders</li>
-      <li routerLink="/admin/products">Manage Products</li>
+      <ng-container *ngIf="showAdmin">
+        <li routerLink="/admin/orders">Manage Orders</li>
+        <li routerLink="/admin/products">Manage Products</li>
+      </ng-container>
     </ul>
   </li>
 </ul>
