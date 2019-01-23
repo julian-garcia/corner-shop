@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -18,6 +21,7 @@ import { OrderOutcomeComponent } from './order-outcome/order-outcome.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { UpdateProductComponent } from './admin/update-product/update-product.component';
 import { LoginComponent } from './login/login.component';
 
 import { AuthService } from './auth.service';
@@ -58,6 +62,11 @@ let routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'admin/products/:key',
+    component: UpdateProductComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
     path: 'admin/products',
     component: AdminProductsComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
@@ -87,10 +96,12 @@ let routes = [
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    UpdateProductComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,

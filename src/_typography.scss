@@ -1,8 +1,8 @@
-h1, h2, h3, h4, h5, h6, .menu-item {
+h1, h2, h3, h4, h5, h6, th, button, label, .menu-item {
   font-family: $heading_font;
 }
 
-a, p, input  {
+a, p, input, td  {
   font-family: $body_font;
 }
 

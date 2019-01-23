@@ -1,0 +1,40 @@
+<div class="form-container">
+  <form class="product-form" #f="ngForm" (ngSubmit)="f.valid && updateProduct(f.value)">
+    <label for="title">Title</label>
+    <div class="input-group">
+      <input name="title" type="text" id="title" required #titleInput="ngModel" 
+            [(ngModel)]="product.title">
+      <h4 class="error" *ngIf="titleInput.touched && titleInput.invalid">Please enter a title</h4>
+    </div>
+    <label for="price">Price</label>
+    <div class="input-group">
+      <input name="price" type="number" id="price" step="0.01" required #priceInput="ngModel" 
+            [(ngModel)]="product.price">
+      <h4 class="error" *ngIf="priceInput.touched && priceInput.invalid">
+        Please enter a price
+      </h4>
+    </div>
+    <label for="category">Category</label>
+    <div class="input-group">
+      <select [(ngModel)]="product.category" name="category" id="category" required #categoryInput="ngModel">
+        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+      </select>
+      <h4 class="error" *ngIf="categoryInput.touched && categoryInput.invalid">
+        Please select a category
+      </h4>
+    </div>
+    <label for="imageurl">Image URL</label>
+    <div class="input-group">
+      <input name="imageurl" type="url" id="imageurl" required #imageUrlInput="ngModel"
+            [(ngModel)]="product.imageurl">
+      <h4 class="error" *ngIf="imageUrlInput.touched && imageUrlInput.invalid">
+        Please enter an image url
+      </h4>
+    </div>
+    <div class="filler"></div>
+    <button type="submit" [disabled]="!f.valid">Update Product</button>
+  </form>
+  <div class="product-card">
+    <img [src]="product.imageurl" *ngIf="product.imageurl">
+  </div>
+</div>

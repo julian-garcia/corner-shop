@@ -1,0 +1,75 @@
+body, html {
+  margin: 0; 
+  padding: 0; 
+  overflow-x: hidden;
+}
+
+button {
+  font-size: 1.5rem;
+  border: none;
+  background-color: darkred;
+  color: white;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    background-color: lightgrey;
+    cursor: default;
+  }
+}
+
+a {
+  color: $link_colour;
+
+  &:hover {
+    color: $link_hover_colour;
+    cursor: pointer;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+
+  thead>tr {
+    border-bottom: 2px solid grey;
+  }
+
+  tbody>tr:nth-of-type(odd) {
+    background-color: lightgrey;
+    border-bottom: 1px solid grey;
+  }
+
+  th, td {
+    padding: 10px 0;
+    text-align: center;
+  }
+}
+
+form {
+  width: 100%;
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr;
+  grid-gap: 16px;
+  margin: 1rem 0;
+
+  .error {
+    padding: 0;
+    margin: 0;
+    color: darkred;
+  }
+
+  @media (min-width:$mobile_width) {
+    grid-template-columns: 150px 1fr;
+  }
+}
+
+input, select {
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  height: 1.5rem;
+}

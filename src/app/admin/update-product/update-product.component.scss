@@ -1,0 +1,12 @@
+@import "global";
+
+:host {grid-area: maincontent; text-align: center;}
+
+.form-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+
+  img {
+    max-width: 200px;
+  }
+}
