@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductService } from 'src/app/product.service';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'admin-products',
@@ -15,14 +15,27 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   filteredProducts: any[];
   subscription: Subscription;
   showAddProductForm = false;
+  rows = [];
+  @ViewChild(DatatableComponent) table: DatatableComponent;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService) {}
 
   ngOnInit() {
     this.productService.getCategories()
       .subscribe(categories => this.categories = categories.sort());
     this.subscription = this.productService.getProducts()
-      .subscribe(products => this.filteredProducts = this.products = products.sort());
+      .subscribe(products => {
+        this.filteredProducts = this.products = products.sort();
+        let rows = [];
+        this.products.filter(p => {
+          let product = p.payload.toJSON(); 
+          rows.push({'title':product.title, 
+                     'price':product.price, 
+                     'edit':[p.key, product.title]}); 
+          });
+          this.rows = rows;
+          this.table.offset = 0;
+      });
   }
 
   ngOnDestroy() {
@@ -35,17 +48,29 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   }
 
   addProductForm() {
-    this.showAddProductForm = true;
+    this.showAddProductForm = !this.showAddProductForm;
   }
 
   deleteProduct(prooductId, productTitle) {
-    if (confirm('Delete product ' + productTitle + '?')) this.productService.delete(prooductId);
+    if (confirm('Delete ' + productTitle + '?')) this.productService.delete(prooductId);
   }
 
-  filter(query) {
+  filter(query: string) {
     this.filteredProducts = (query) ? 
-      this.products.filter(p => p.payload.toJSON().title.includes(query)) : this.products;
-    console.log(query, this.filteredProducts);
-    this.products = this.filteredProducts;
+      this.products.filter(
+        p => p.payload.toJSON().title.toLowerCase().includes(query.toLowerCase())
+      ) : this.products;
+
+    let rows = [];
+    this.filteredProducts.filter(p => {
+      let product = p.payload.toJSON(); 
+      rows.push({'title':product.title, 
+                 'price':product.price, 
+                 'edit':[p.key, product.title]}); 
+                
+      });
+    this.rows = rows;
+    console.log(this.rows);
+    this.table.offset = 0;
   }
 }

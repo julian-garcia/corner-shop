@@ -1,8 +1,9 @@
-h1, h2, h3, h4, h5, h6, th, button, label, .menu-item {
+h1, h2, h3, h4, h5, h6, 
+th, button, label, .datatable-header-cell-label, .menu-item {
   font-family: $heading_font;
 }
 
-a, p, input, td  {
+a, p, input, td, .datatable-body-cell-label  {
   font-family: $body_font;
 }
 

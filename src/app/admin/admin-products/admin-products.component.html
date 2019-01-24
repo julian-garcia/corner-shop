@@ -24,7 +24,7 @@
   </div>
   <label for="imageurl">Image URL</label>
   <div class="input-group">
-    <input ngModel name="imageurl" type="url" id="imageurl" required #imageUrlInput="ngModel">
+    <input ngModel name="imageUrl" type="url" id="imageurl" required #imageUrlInput="ngModel">
     <h4 class="error" *ngIf="imageUrlInput.touched && imageUrlInput.invalid">
       Please enter an image url
     </h4>
@@ -33,26 +33,23 @@
   <button type="submit" [disabled]="!f.valid">Save New Product</button>
 </form>
 
-<input  #query (keyup)="filter(query.value)" type="text" placeholder="Search...">
+<input #query (keyup)="filter(query.value)" type="text" placeholder="Search...">
 
-<table class="product-list">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Price</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products;">
-      <td>{{ product.payload.toJSON().title }}</td>
-      <td>£{{ product.payload.toJSON().price }}</td>
-      <td>
-        <a [routerLink]="['/admin/products/',product.key]">Update</a>&nbsp;
-        <a (click)="deleteProduct(product.key, product.payload.toJSON().title)">
+<ngx-datatable 
+  #table
+  [rows]="rows"
+  [columnMode]="'force'"
+  [limit]="10"
+  [headerHeight]="50"
+  [footerHeight]="50">
+  <ngx-datatable-column name="Title"></ngx-datatable-column>
+  <ngx-datatable-column name="Price"></ngx-datatable-column>
+  <ngx-datatable-column name="Edit">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <a [routerLink]="['/admin/products/', row.edit[0]]">Update</a>&nbsp;
+        <a (click)="deleteProduct(row.edit[0], row.edit[1])">
           <i class="far fa-trash-alt"></i>
         </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
