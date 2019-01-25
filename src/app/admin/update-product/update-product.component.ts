@@ -28,4 +28,8 @@ export class UpdateProductComponent implements OnInit {
     this.productService.update(product, this.id);
     this.router.navigate(['admin/products']);
   }
+
+  cancelUpdate() {
+    this.router.navigate(['admin/products']);
+  }
 }

@@ -2,9 +2,6 @@
 
 :host {grid-area: maincontent; text-align: center;}
 
-i.datatable-icon-right::before {
-  content: "a";
-  position: absolute;
-  top:0;
-  width: 1em; height: 1em;
+.filter {
+  margin: 1.5rem 0;
 }

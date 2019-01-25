@@ -25,16 +25,16 @@
     </div>
     <label for="imageurl">Image URL</label>
     <div class="input-group">
-      <input name="imageurl" type="url" id="imageurl" required #imageUrlInput="ngModel"
+      <input name="imageUrl" type="url" id="imageurl" required #imageUrlInput="ngModel"
             [(ngModel)]="product.imageUrl">
+      <div class="product-card">
+        <img [src]="product.imageUrl" *ngIf="product.imageUrl">
+      </div>
       <h4 class="error" *ngIf="imageUrlInput.touched && imageUrlInput.invalid">
         Please enter an image url
       </h4>
     </div>
-    <div class="filler"></div>
+    <button type="button" (click)="cancelUpdate()">Cancel</button>
     <button type="submit" [disabled]="!f.valid">Update Product</button>
   </form>
-  <div class="product-card">
-    <img [src]="product.imageUrl" *ngIf="product.imageUrl">
-  </div>
 </div>

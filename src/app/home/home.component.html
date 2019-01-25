@@ -1,3 +1,27 @@
-<p>
-  home works!
-</p>
+<ul class="categories">
+  <li class="active" 
+      [routerLink]="['/']" 
+      [ngClass]="{'active': selectedCategory == ''}"
+      (click)="selectedCategory=''; filterCategory()">
+    <h3>All</h3>
+  </li>
+  <li *ngFor="let category of categories" 
+      [routerLink]="['/']" [queryParams]="{ category: category}"
+      [ngClass]="{'active': selectedCategory == category}"
+      (click)="selectedCategory=category; filterCategory(category)">
+    <h3>{{ category | titlecase }}</h3>
+  </li>
+</ul>
+<div class="home-container">
+  <div class="filler"></div>
+  <div class="product-listing">
+    <div class="product" *ngFor="let product of categoryProducts;">
+      <div class="product-image-container">
+        <img class="product-image"  [src]="product.payload.toJSON().imageUrl" alt="">
+      </div>
+      <h4 class="product-title">{{ product.payload.toJSON().title }}</h4>
+      <h5 class="product-price">£{{ product.payload.toJSON().price | number : '1.2-2' }}</h5>
+      <button class="product-cart-button" type="button"><i class="fas fa-cart-plus"></i></button>
+    </div>
+  </div>
+</div>

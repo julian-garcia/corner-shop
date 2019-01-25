@@ -70,7 +70,6 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
                 
       });
     this.rows = rows;
-    console.log(this.rows);
     this.table.offset = 0;
   }
 }
