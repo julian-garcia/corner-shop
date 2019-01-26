@@ -71,6 +71,17 @@
       .product-cart-button {
         width: 100%;
       }
+
+      .product-counter {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr; 
+
+        .product-count {
+          margin: 0;
+          text-align: center;
+          line-height: 2em;
+        }
+      }
     }
   }
 }

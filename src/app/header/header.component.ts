@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
 import { switchMap, map } from 'rxjs/operators';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'header',
@@ -11,8 +12,12 @@ import { switchMap, map } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   showDropDownMenu: boolean = false;
   showAdmin: boolean = false;
+  cartCount: number;
 
-  constructor(public authService: AuthService, private userService: UserService) { 
+  constructor(public authService: AuthService, 
+              private userService: UserService,
+              private cartService: CartService) {
+    this.cartService.totalCount.subscribe(count => this.cartCount = count);
   }
 
   ngOnInit() {
@@ -21,6 +26,8 @@ export class HeaderComponent implements OnInit {
       .pipe(map(appUser => appUser['isAdmin'])).subscribe(isAdmin => {
         this.showAdmin = isAdmin;
       });
+
+    this.cartService.totalCount.subscribe(count => this.cartCount = count);
   }
 
   onDropDownClick() {

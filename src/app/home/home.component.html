@@ -21,7 +21,22 @@
       </div>
       <h4 class="product-title">{{ product.payload.toJSON().title }}</h4>
       <h5 class="product-price">£{{ product.payload.toJSON().price | number : '1.2-2' }}</h5>
-      <button class="product-cart-button" type="button"><i class="fas fa-cart-plus"></i></button>
+      <button class="product-cart-button" type="button"
+              (click)="addToCart(product.key)"
+              *ngIf="!product.count">
+        <i class="fas fa-cart-plus"></i>
+      </button>
+      <div class="product-counter" *ngIf="product.count">
+        <button class="product-cart-button" type="button"
+                (click)="removeFromCart(product.key)">
+          <i class="fas fa-minus"></i>
+        </button>
+        <h4 class="product-count">{{ product.count }}</h4>
+        <button class="product-cart-button" type="button"
+                (click)="addToCart(product.key)">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>
