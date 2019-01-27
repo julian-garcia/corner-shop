@@ -3,7 +3,7 @@
     <img src="assets/img/pepper.svg" alt="Corner shop logo" class="logo">
   </li>
   <li class="menu-item" routerLink="/shopping-cart">
-    Shopping Cart {{ cartCount }}
+    Shopping Cart <span class="cart-count">{{ cartCount }}</span>
   </li>
   <ng-template #anonUser>
     <li class="menu-item" routerLink="/login">

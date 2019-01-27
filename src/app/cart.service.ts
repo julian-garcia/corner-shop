@@ -90,4 +90,25 @@ export class CartService {
         }
       });
   }
+
+  calcTotalCost(products) {
+    let totalCost = 0;
+    products.filter(
+      product => {
+        totalCost += (product.count * product.payload.toJSON().price);
+      }
+    );
+    return totalCost;
+  }
+
+  filterProductsInCart(products) {
+    products.filter(
+      product => {
+        this.appendCounts(products, product.key);
+        if (product.count == null) {
+          products.splice(products.indexOf(product),1);
+        }
+      }
+    );
+  }
 }

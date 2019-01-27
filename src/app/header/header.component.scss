@@ -26,6 +26,13 @@ ul.main-menu {
     &.user {
       position: relative;
     }
+
+    .cart-count {
+      border-radius: 50%;
+      background-color: $highlight_colour;
+      color: white;
+      padding: 3px 5px;
+    }
   }
 
   .drop-down-menu {

@@ -1,3 +1,26 @@
-<p>
-  shopping-cart works!
-</p>
+<div class="cart">
+  <div class="cart-product" *ngFor="let product of cartProducts">
+    <img [src]="product.payload.toJSON().imageUrl" >
+    <h4>{{ product.payload.toJSON().title }}</h4>
+    <h4>x {{ product.count }}</h4>
+    <h4>£{{ (product.payload.toJSON().price * product.count) | number : '1.2-2' }}</h4>
+    <div class="product-counter" *ngIf="product.count">
+      <button class="product-cart-button" type="button"
+              (click)="removeFromCart(product.key)">
+        <i class="fas fa-minus"></i>
+      </button>
+      <button class="product-cart-button" type="button"
+              (click)="addToCart(product.key)">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="cart-product">
+    <div class="filler"></div>
+    <h4>Total</h4>
+    <div class="filler"></div>
+    <h4>£{{ totalCost | number : '1.2-2' }}</h4>
+    <div class="filler"></div>
+  </div>
+</div>
