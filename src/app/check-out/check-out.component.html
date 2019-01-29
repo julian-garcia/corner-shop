@@ -1,3 +1,52 @@
-<p>
-  check-out works!
-</p>
+<div class="checkout-container">
+  <div class="shipping-form">
+    <form #f="ngForm" (ngSubmit)="f.valid && submitOrder(f.value)">
+      <label for="name">Name</label>
+      <div class="input-group">
+        <input required type="text" name="name" id="name" 
+              #nameInput="ngModel" [(ngModel)]="name">
+        <h4 class="error" *ngIf="nameInput.touched && nameInput.invalid">
+          Please enter your name
+        </h4>
+      </div>
+      <label for="addressLine1">Address</label>
+      <div class="input-group">
+        <input required type="text" name="addressLine1" id="addressLine1" 
+              placeholder="Line 1"
+              [(ngModel)]="addressLine1"
+              #address1Input="ngModel">
+        <h4 class="error" *ngIf="address1Input.touched && address1Input.invalid">
+          Please enter your address
+        </h4>
+        <input type="text" name="addressLine2" id="addressLine2" 
+              placeholder="Line 2"
+              [(ngModel)]="addressLine2"
+              #address2Input="ngModel">
+      </div>
+      <label for="city">City</label>
+      <div class="input-group">
+        <input required type="text" name="city" id="city" 
+              #cityInput="ngModel" [(ngModel)]="city">
+        <h4 class="error" *ngIf="cityInput.touched && cityInput.invalid">
+          Please enter a city
+        </h4>
+      </div>
+      <div class="filler"></div>
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+  <ul class="order-summary">
+    <li class="order-summary-item" *ngFor="let order of orderSummary">
+      <ng-container *ngIf="order.count">
+        <span>x {{ order.count }}</span>
+        <span>{{ order.payload.toJSON().title }}</span>
+        <span>£{{ (order.payload.toJSON().price * order.count) | number: '1.2-2' }}</span>
+      </ng-container>
+    </li>
+    <li class="order-summary-item">
+      <span></span>
+      <span></span>
+      <h4>£{{ orderTotal | number: '1.2-2'}}</h4>
+    </li> 
+  </ul>
+</div>

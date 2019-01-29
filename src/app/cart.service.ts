@@ -95,20 +95,25 @@ export class CartService {
     let totalCost = 0;
     products.filter(
       product => {
-        totalCost += (product.count * product.payload.toJSON().price);
+        if (product.count) totalCost += (product.count * product.payload.toJSON().price);
       }
     );
     return totalCost;
   }
 
   filterProductsInCart(products) {
-    products.filter(
-      product => {
-        this.appendCounts(products, product.key);
-        if (product.count == null) {
-          products.splice(products.indexOf(product),1);
+    if (!localStorage.getItem('cartProducts')) {
+      return [];
+    } else {
+      products.filter(
+        product => {
+          this.appendCounts(products, product.key);
+          if (product.count == null) {
+            products.splice(products.indexOf(product), 1);
+          }
         }
-      }
-    );
+      );
+      return products;
+    }
   }
 }

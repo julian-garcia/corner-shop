@@ -17,8 +17,7 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit() {
     this.productService.getProducts().subscribe(
       products => {
-        this.cartProducts = products;
-        this.cartService.filterProductsInCart(this.cartProducts);
+        this.cartProducts = this.cartService.filterProductsInCart(products);
         this.totalCost = this.cartService.calcTotalCost(this.cartProducts);
       });
   }
@@ -27,7 +26,7 @@ export class ShoppingCartComponent implements OnInit {
     this.cartService.addToCart(key);
     this.cartService.appendCounts(this.cartProducts, key);
     this.cartService.emitTotalCount();
-    this.cartService.filterProductsInCart(this.cartProducts);
+    this.cartProducts = this.cartService.filterProductsInCart(this.cartProducts);
     this.totalCost = this.cartService.calcTotalCost(this.cartProducts);
   }
 
@@ -35,7 +34,7 @@ export class ShoppingCartComponent implements OnInit {
     this.cartService.removeFromCart(key);
     this.cartService.appendCounts(this.cartProducts, key);
     this.cartService.emitTotalCount();
-    this.cartService.filterProductsInCart(this.cartProducts);
+    this.cartProducts = this.cartService.filterProductsInCart(this.cartProducts);
     this.totalCost = this.cartService.calcTotalCost(this.cartProducts);
   }
 }

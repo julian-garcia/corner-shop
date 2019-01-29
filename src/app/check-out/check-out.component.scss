@@ -1,3 +1,22 @@
 @import "global";
 
 :host {grid-area: maincontent;}
+
+.checkout-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1em;
+
+  @media (min-width: $tablet_width) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .order-summary {
+    .order-summary-item {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      margin-bottom: 10px;
+    }
+  }
+}
