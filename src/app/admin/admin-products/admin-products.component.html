@@ -49,9 +49,9 @@
   <ngx-datatable-column name="Edit">
     <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
       <a [routerLink]="['/admin/products/', row.edit[0]]">Update</a>&nbsp;
-        <a (click)="deleteProduct(row.edit[0], row.edit[1])">
-          <i class="far fa-trash-alt"></i>
-        </a>
+      <a (click)="deleteProduct(row.edit[0], row.edit[1])">
+        <i class="far fa-trash-alt"></i>
+      </a>
     </ng-template>
   </ngx-datatable-column>
 </ngx-datatable>

@@ -1,3 +1,12 @@
-<ul>
-  <li *ngFor="let order of userOrders">{{ order.customerName }}</li>
+<ul class="order-list">
+  <li class="order-list__item" *ngFor="let order of userOrders">
+    <h4 class="order-list__item__title">
+      {{ order.orderDate }}, £{{ order.orderTotal | number:'1.2-2' }}
+    </h4>
+    <span *ngFor="let product of order.productsOrdered; let lastProduct = last">
+      {{ product.details?.title }} x {{ product.count }} @ 
+      £{{ product.details?.price | number:'1.2-2' }} 
+      each{{ lastProduct ? '' : ' // ' }}
+    </span>
+  </li>
 </ul>

@@ -3,5 +3,6 @@ export class Order {
               public customerAddress: string,
               public customerCity: string,
               public productsOrdered: {productId:string, productCount: number}[],
-              public orderTotal: number) {}
+              public orderTotal: number,
+              public orderDate: string) {}
 }

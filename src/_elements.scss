@@ -81,3 +81,20 @@ input, select {
     }
   }
 }
+
+.order-list {
+  padding: 0;
+
+  &__item {
+    list-style: none;
+    padding: .5rem 2rem 1rem 2rem;
+
+    &:nth-of-type(odd) {
+      background-color: lightgray;
+    }
+
+    &__title {
+      margin: 0;
+    }
+  }
+}

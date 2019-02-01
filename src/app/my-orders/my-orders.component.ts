@@ -21,19 +21,17 @@ export class MyOrdersComponent implements OnInit {
         orders => {
           this.userOrders = orders;
           this.userOrders.forEach(order => {
-            let products = [];            
+            let products = [];
             order['productsOrdered'].forEach(product => {
               this.productService.retrieveProduct(product.productId).subscribe(
                 productDetails => {
-                  products.push({'details': productDetails, 'count': product.productCount});
+                  if (product.productCount>0) products.push({'details': productDetails, 'count': product.productCount});
                   order['productsOrdered'] = products;
-                }
-              );
+                });
             });
           });
-        }
-      );
-    });
+        });
+      });
   }
 
 }

@@ -19,4 +19,8 @@ export class UserService {
   get(uid: string) {
     return this.db.object('/users/' + uid).valueChanges();
   }
+
+  getAll() {
+    return this.db.object('/users').valueChanges();
+  }
 }

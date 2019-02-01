@@ -33,5 +33,7 @@ export class CheckOutComponent implements OnInit {
   submitOrder(shippingFormValues) {
     this.orderService.add(shippingFormValues, this.orderTotal, this.orderSummary, this.user);
     this.router.navigate(['/order-details']);
+    localStorage.removeItem('cartProducts');
+    this.cartService.emitTotalCount();
   }
 }
