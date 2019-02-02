@@ -1,3 +1,28 @@
 @import "global";
 
 :host {grid-area: maincontent;}
+
+.order-form {
+  background-color: #ffffffec;
+  position: fixed;
+  top: 50px;
+  bottom: 10px;
+  left: 50%;
+  width: 80%;
+  padding: 1rem;
+  transform: translateX(-50%);
+  border: 2px solid gray;
+  overflow-y: scroll;
+
+  &__label {
+    margin: 0;
+  }
+
+  @media (min-width:$tablet_width) {
+    width: 50%;
+  }
+
+  @media (min-width:$desktop_width) {
+    width: 40%;
+  }
+}

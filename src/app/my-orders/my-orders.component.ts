@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../order.service';
-import { AuthService } from '../auth.service';
 import { ProductService } from '../product.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'my-orders',
@@ -9,27 +9,33 @@ import { ProductService } from '../product.service';
   styleUrls: ['./my-orders.component.scss']
 })
 export class MyOrdersComponent implements OnInit {
-  userOrders: {}[];
+  userOrders: {}[] = [];
 
   constructor(private orderService: OrderService,
-              private authService: AuthService,
+              private userService: UserService,
               private productService: ProductService) { }
 
   ngOnInit() {
-    this.authService.user$.subscribe(user => {
-      this.orderService.getUserOrders(user.uid).subscribe(
-        orders => {
-          this.userOrders = orders;
-          this.userOrders.forEach(order => {
-            let products = [];
-            order['productsOrdered'].forEach(product => {
-              this.productService.retrieveProduct(product.productId).subscribe(
-                productDetails => {
-                  if (product.productCount>0) products.push({'details': productDetails, 'count': product.productCount});
-                  order['productsOrdered'] = products;
-                });
+    this.userService.getAll().subscribe(
+      users => {
+        Object.keys(users).forEach(userkey => {
+          this.orderService.getUserOrders(userkey).subscribe( 
+            orders => {
+              let userOrders: {}[] = orders;
+              userOrders.forEach(order => {
+                order =  {...order['payload'].toJSON(), ...{'key': order['key']}, ...{'user': userkey}};
+                let products = [];
+                for (let prop in order['productsOrdered']) {
+                  let product = order['productsOrdered'][prop];
+                  this.productService.retrieveProduct(product.productId).subscribe(
+                    productDetails => {
+                      if (product.productCount>0) products.push({'details': productDetails, 'count': product.productCount});
+                      order['productsOrdered'] = products;
+                    });
+                }
+                this.userOrders.push(order);
+              });
             });
-          });
         });
       });
   }

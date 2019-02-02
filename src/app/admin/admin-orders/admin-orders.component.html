@@ -1,19 +1,43 @@
 <ul class="order-list" *ngIf="allOrders">
-  <li class="order-list__item" *ngFor="let order of allOrders">
-    <h4 class="order-list__item__title">
+  <li class="order-list__item" *ngFor="let order of allOrders; let i = index">
+    <h4 class="order-list__title">
       {{ order?.customerName }}, 
       {{ order?.orderDate }}, 
       £{{ order?.orderTotal | number:'1.2-2' }}
     </h4>
     <ng-container *ngIf="order?.productsOrdered.length > 0">
-    <span *ngFor="let product of order?.productsOrdered; let lastProduct = last">
-      {{ product?.details?.title }} x {{ product?.count }} @ 
-      £{{ product?.details?.price | number:'1.2-2' }} 
-      each{{ lastProduct ? '' : ' // ' }}
-    </span>
+      <span *ngFor="let product of order?.productsOrdered; let lastProduct = last">
+        {{ product?.details?.title }} x {{ product?.count }} @ 
+        £{{ product?.details?.price | number:'1.2-2' }} 
+        each{{ lastProduct ? '' : ' // ' }}
+      </span>
     </ng-container>
-    <button (click)="adjustOrder(order.key, order.user)">
+    <br>
+    <button class="order-list__button" (click)="adjustOrderForm(order, i)">
       <i class="far fa-edit"></i>
     </button>
   </li>
 </ul>
+
+<ng-container *ngIf="showAdjustForm">
+  <form class="order-form" #f="ngForm" 
+        (ngSubmit)="f.valid && adjustOrder(f.value, selectedOrder)">
+    <ng-container *ngFor="let product of selectedOrder.productsOrdered; let i=index; let lastProduct = last">
+      <div class="input-group">
+        <input PositiveNumber="true" required type="number" name="count{{i}}" id="count" 
+             #countInput="ngModel" [(ngModel)]="product.count" min="0">
+        <h4 class="error" *ngIf="countInput.touched && (countInput.invalid || countInput.value < 0)">
+          Please enter a value of zero or more
+        </h4>
+      </div>
+      <h4 class="order-form__label">
+        {{ product.details.title }} x {{ product.count }} @ 
+        £{{ product.details.price | number:'1.2-2' }} each
+      </h4>
+    </ng-container>
+    <button type="button" (click)="cancelAdjustment(f.form.pristine,f)">
+      <i class="fas fa-times"></i>
+    </button>
+    <button type="submit" [disabled]="f.invalid">Adjust Order</button>
+  </form>
+</ng-container>

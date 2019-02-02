@@ -84,17 +84,45 @@ input, select {
 
 .order-list {
   padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
 
   &__item {
     list-style: none;
     padding: .5rem 2rem 1rem 2rem;
+    position: relative;
 
-    &:nth-of-type(odd) {
+    &:nth-of-type(4n + 1) {
       background-color: lightgray;
     }
 
-    &__title {
-      margin: 0;
+    &:nth-of-type(4n + 2) {
+      background-color: lighten(lightgray,5);
     }
+
+    &:nth-of-type(4n + 3) {
+      background-color: lighten(lightgray,8);
+    }
+
+    &:nth-of-type(4n + 4) {
+      background-color: lighten(lightgray,12);
+    }
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__button {
+    background-color: transparent;
+    color: $link_colour;
+    position: absolute;
+    padding: 0;
+    bottom: 0;
+    right: 0;
+  }
+
+  @media (min-width:$tablet_width) {
+    grid-template-columns:  1fr 1fr;
   }
 }

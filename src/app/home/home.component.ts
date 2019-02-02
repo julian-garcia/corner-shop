@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../cart.service';
 
 @Component({
@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
   productCounts: {'key':string, 'count':number}[];
 
   constructor(private productService: ProductService,
-              private router: Router,
               private route: ActivatedRoute,
               private cartService: CartService) { }
 

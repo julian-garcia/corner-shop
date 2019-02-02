@@ -33,7 +33,11 @@ export class OrderService {
     return this.db.list('/orders/' + userId).snapshotChanges();
   }
 
-  retrieveOrder(orderId, userId) {
-    return this.db.list('/orders/' + userId + '/' + orderId).valueChanges();
+  updateCount(orderId:string, userId:string, productIndex, productCount) {
+    return this.db.object('/orders/' + userId + '/' + orderId + '/productsOrdered/' + productIndex).update({'productCount': productCount});
+  }
+
+  updateTotal(orderId:string, userId:string, productTotal) {
+    return this.db.object('/orders/' + userId + '/' + orderId).update({'orderTotal': productTotal});
   }
 }
