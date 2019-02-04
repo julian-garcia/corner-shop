@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { UserService } from '../user.service';
+import { AuthService } from 'shared/services/auth.service';
+import { UserService } from 'shared/services/user.service';
 import { switchMap, map } from 'rxjs/operators';
-import { CartService } from '../cart.service';
+import { CartService } from 'shared/services/cart.service';
 
 @Component({
   selector: 'header',

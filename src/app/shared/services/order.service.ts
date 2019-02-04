@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Order } from './models/order';
+import { Order } from 'shared/models/order';
 import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({

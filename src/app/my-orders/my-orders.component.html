@@ -1,6 +1,6 @@
 <ul class="order-list" *ngIf="userOrders">
   <li class="order-list__item" *ngFor="let order of userOrders">
-    <h4 class="order-list__item__title">
+    <h4 class="order-list__title">
       {{ order?.customerName }}, 
       {{ order?.orderDate }}, 
       £{{ order?.orderTotal | number:'1.2-2' }}

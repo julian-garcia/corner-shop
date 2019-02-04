@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Product } from '../../models/product';
-import { ProductService } from 'src/app/product.service';
+import { Product } from 'shared/models/product';
+import { ProductService } from 'app/shared/services/product.service';
 import { Subscription } from 'rxjs';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 
