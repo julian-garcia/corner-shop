@@ -1,5 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { FormsModule } from '@angular/forms';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { PositiveNumber } from 'app/positive-number.directive';
 
 import { AuthGuard } from './services/auth-guard.service';
@@ -11,7 +15,11 @@ import { UserService } from './services/user.service';
     PositiveNumber
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    NgxDatatableModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
   ],
   providers: [
     AuthService,
@@ -19,7 +27,12 @@ import { UserService } from './services/user.service';
     UserService,
   ],
   exports: [
-    PositiveNumber
+    CommonModule,
+    PositiveNumber,
+    FormsModule,
+    NgxDatatableModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
   ]
 })
 export class SharedModule { }

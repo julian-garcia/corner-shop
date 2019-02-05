@@ -15,7 +15,7 @@ ul.main-menu {
     text-align: center;
     justify-content: space-evenly;
     list-style: none;
-    border-bottom: 1px solid grey;
+    border-bottom: 2px solid lightgray;
     padding: 10px;
     cursor: pointer;
   
@@ -27,11 +27,16 @@ ul.main-menu {
       position: relative;
     }
 
+    &__cart {
+      font-size: 1.5rem;
+      color: $highlight_colour;
+    }
+
     .cart-count {
       border-radius: 25%;
       background-color: $highlight_colour;
       color: white;
-      padding: 3px 5px;
+      padding: 0 5px;
     }
   }
 
