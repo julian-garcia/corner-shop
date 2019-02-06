@@ -2,7 +2,7 @@
   <li class="active" 
       [routerLink]="['/']" 
       [ngClass]="{'active': selectedCategory == ''}"
-      (click)="selectedCategory=''; filterCategory()">
+      (click)="selectedCategory=''; filterCategory(selectedCategory)">
     <h3>All</h3>
   </li>
   <li *ngFor="let category of categories" 

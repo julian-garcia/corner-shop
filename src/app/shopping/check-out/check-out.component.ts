@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./check-out.component.scss']
 })
 export class CheckOutComponent implements OnInit {
+  formModel: any = {};
   orderSummary: any[];
   orderTotal: number;
   user: firebase.User;

@@ -1,6 +1,15 @@
 # CornerShop
+A grocery shop front end developed using Angular (generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4). Makes use of modules, components, directives, services, template driven form. Deployed using the Firebase platform which also houses the backend database.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
+A demo of this app is available on Firebase at this address: [corner-shop-eb250.firebaseapp.com](https://corner-shop-eb250.firebaseapp.com)
+
+## Features
+**Product listing** - Lists products with ability to add 1+ items to a shopping cart  
+**Product management** - Delete products or amend their title/image/price  
+**Shopping cart** - Add products for purchasing to local storage  
+**Checkout** - Save a user order in the backend and empty the cart  
+**Order management** - Revise product amounts for historical orders  
+**Google authentication** - Firebase google user authentication
 
 ## Development server
 

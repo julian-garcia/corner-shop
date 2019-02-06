@@ -25,10 +25,13 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
     this.subscription = this.userService.getAll().subscribe(
       users => {
         Object.keys(users).forEach(userkey => {
-          this.orderService.getUserOrders(userkey).subscribe( 
+          this.orderService.getUserOrders(userkey).subscribe(
             orders => {
               let userOrders: {}[] = orders;
               this.allOrders = [];
+              // Extract user and order IDs so that we can update the relevant order
+              // if a product amount is adjusted. Also extracting product details as the
+              // product list within an order is just the product id alonside a count
               userOrders.forEach(order => {
                 order =  {...order['payload'].toJSON(), ...{'key': order['key']}, ...{'user': userkey}};
                 let products = [];
@@ -53,10 +56,9 @@ export class AdminOrdersComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  cancelAdjustment(formUntouched,f) {
+  cancelAdjustment(formUntouched) {
     this.showAdjustForm = !this.showAdjustForm;
-    console.log(f);
-    // if (!formUntouched) window.location.reload();
+    if (!formUntouched) window.location.reload();
   }
 
   adjustOrderForm(order, orderIndex) {

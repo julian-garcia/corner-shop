@@ -35,7 +35,7 @@
         £{{ product.details.price | number:'1.2-2' }} each
       </h4>
     </ng-container>
-    <button type="button" (click)="cancelAdjustment(f.form.pristine,f)">
+    <button type="button" (click)="cancelAdjustment(f.form.pristine)">
       <i class="fas fa-times"></i>
     </button>
     <button type="submit" [disabled]="f.invalid">Adjust Order</button>
